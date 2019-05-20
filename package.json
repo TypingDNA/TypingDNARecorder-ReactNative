@@ -1,0 +1,19 @@
+{
+  "name": "typingdnarecorder-react-native",
+  "version": "1.0.0",
+  "description": "TypingDNA Recorder for React Native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "typingdna",
+    "typingdna-recorder"
+  ],
+  "author": "",
+  "license": "",
+  "peerDependencies": {
+    "react-native": "0.59.5"
+  }
+}

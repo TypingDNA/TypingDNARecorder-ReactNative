@@ -1,0 +1,6 @@
+rootProject.name = 'TypingDNARecorderReactNative'
+
+include ':app'
+
+include ':typingdnarecorder-react-native'
+project(':typingdnarecorder-react-native').projectDir = new File(settingsDir, '../node_modules/typingdnarecorder-react-native/android')
