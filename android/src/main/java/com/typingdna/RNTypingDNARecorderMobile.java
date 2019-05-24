@@ -59,7 +59,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class RNTypingDNARecorderMobile extends RNTypingDNARecorderBase implements SensorEventListener {
-    private TypingDNAOverlayService typingDNAOverlayService;
+    private RNTypingDNAOverlayService typingDNAOverlayService;
     private static Activity mActivity;
     RNTypingDNARecorderMobile self;
     private Boolean mServiceIsBound;
@@ -621,7 +621,7 @@ public class RNTypingDNARecorderMobile extends RNTypingDNARecorderBase implement
     private void initServiceConnection(){
         mServiceConnection = new ServiceConnection() {
             public void onServiceConnected(ComponentName className, IBinder service) {
-                typingDNAOverlayService = ((TypingDNAOverlayService.LocalBinder) service).getService();
+                typingDNAOverlayService = ((RNTypingDNAOverlayService.LocalBinder) service).getService();
                 typingDNAOverlayService.setmTypingDNARecorderMobile(self);
             }
 
@@ -637,7 +637,7 @@ public class RNTypingDNARecorderMobile extends RNTypingDNARecorderBase implement
         }
         try {
             if (!mServiceIsBound && mActivity != null && mServiceConnection != null) {
-                mActivity.bindService(new Intent(mActivity.getApplicationContext(), TypingDNAOverlayService.class),
+                mActivity.bindService(new Intent(mActivity.getApplicationContext(), RNTypingDNAOverlayService.class),
                         mServiceConnection,
                         Context.BIND_AUTO_CREATE);
                 mServiceIsBound = true;
