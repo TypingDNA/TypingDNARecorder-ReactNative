@@ -3,15 +3,11 @@
 
 ## Getting started
 
-```bash
-$ npm install typingdnarecorder-react-native --save
-````
+`$ npm install typingdnarecorder-react-native --save`
 
 ### Mostly automatic installation (not recommended)
 
-```bash
-$ react-native link typingdnarecorder-react-native
-```
+`$ react-native link typingdnarecorder-react-native`
 
 ### Manual installation
 
@@ -29,28 +25,28 @@ $ react-native link typingdnarecorder-react-native
 1. Open up `android/app/src/main/java/[...]/MainApplication.java`
   - Add `import com.typingdna.RNTypingdnarecorderPackage;` to the imports at the top of the file
   - Add `new RNTypingdnarecorderPackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:  
-```
-include ':typingdnarecorder-react-native'
-project(':typingdnarecorder-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/typingdnarecorder-react-native/android')
-```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:  
-```
-implementation project(':typingdnarecorder-react-native')
-```
-4. Edit the following lines in `android/build.gradle`:  
-```
-buildToolsVersion = "28.0.3"
-minSdkVersion = 19
-compileSdkVersion = 28
-targetSdkVersion = 28
-supportLibVersion = "28.0.0"
-```
-5. Add the following lines to `android/app/src/main/AndroidManifest.xml` before `<application>`:  
-```xml
-<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-<uses-permission android:name="android.permission.TYPE_APPLICATION_OVERLAY"/>
-```
+2. Append the following lines to `android/settings.gradle`:
+  	```
+  	include ':typingdnarecorder-react-native'
+  	project(':typingdnarecorder-react-native').projectDir = new File(rootProject.projectDir, 	'../node_modules/typingdnarecorder-react-native/android')
+  	```
+3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+  	```
+      implementation project(':typingdnarecorder-react-native')
+  	```
+4. Edit the following lines in `build.gradle`:
+		```
+			buildToolsVersion = "28.0.3"
+			minSdkVersion = 19
+			compileSdkVersion = 28
+			targetSdkVersion = 28
+			supportLibVersion = "28.0.0"
+		```
+5. Add the following lines to `AndroidManifest.xml` before `<application>`:
+		```
+			<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    	<uses-permission android:name="android.permission.TYPE_APPLICATION_OVERLAY"/>
+		```
 
 ## Usage
 
@@ -70,18 +66,23 @@ import tdna from 'typingdnarecorder-react-native';
 
 Where:
 
-* `type` the type of the pattern
-	* `0` - used when comparing random text of usually 120-180 characters long
-	* `1` - recommended for email passwords, phone numbers, credit card numbers, short texts
-	* `2` - best accuracy, recommended when the text is not a secret
-* `length` (NOT required for type 0) length of the text for which you want the typing pattern
-* `text` (NOT required for type 0) a typed string that you want the typing pattern for
-* `textId` (Optional - 0 = ignore) a personalized id for the type text
-* `targetId` specifies from which target the pattern should be recorded from
-* `caseSensitive` (NOT required for type 0) Used only if you pass a text for type 1
+* **type** the type of the pattern
+	* **0** - used when comparing random text of usually 120-180 characters long
+	* **1** - recommended for email passwords, phone numbers, credit card numbers, short texts
+	* **2** - best accuracy, recommended when the text is not a secret
+
+* **length** (NOT required for type 0) length of the text for which you want the typing pattern
+
+* **text** (NOT required for type 0) a typed string that you want the typing pattern for
+
+* **textId** (Optional - 0 = ignore) a personalized id for the type text
+
+* **targetId** specifies from which target the pattern should be recorded from
+
+* **caseSensitive** (NOT required for type 0) Used only if you pass a text for type 1
   
   
-```jsx
+```javascript
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, Button, Platform} from 'react-native';
 import tdna from 'typingdnarecorder-react-native';

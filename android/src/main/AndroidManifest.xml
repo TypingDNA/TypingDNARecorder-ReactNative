@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.TYPE_APPLICATION_OVERLAY"/>
 
     <application>
-        <service android:name=".RNTypingDNAOverlayService" />
+        <service android:name=".TypingDNAOverlayService" />
     </application>
 </manifest>
   

@@ -32,7 +32,7 @@ export default class App extends Component<Props> {
   }
 
   getTypingPattern() {
-    tdna.getTypingPattern(0, 0, "", 0, this.targetId, false, (tp) => {
+    tdna.getTypingPattern(2, 0, "", 0, this.targetId, false, (tp) => {
       this.setState({pattern: tp});
     });
   }

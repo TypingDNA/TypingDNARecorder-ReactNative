@@ -6,7 +6,7 @@
 //  https://www.typingdna.com
 //
 //
-//  @version 3.0
+//  @version 3.1
 //  @author Raul Popa & Stefan Endres
 //  @copyright TypingDNA Inc. https://www.typingdna.com
 //  @license http://www.apache.org/licenses/LICENSE-2.0
@@ -25,13 +25,16 @@
 import Foundation;
 import UIKit;
 import CoreMotion;
+import os.log;
+import _SwiftOSOverlayShims;
 
 /**
  * Instantiate RNTypingDNARecorderMobile class in your project and make sure you also add UIViewExtention to your project
  */
 
 // DO NOT MODIFY
-open class RNTypingDNARecorderMobile {
+@objc(RNTypingDNARecorderMobile)
+open class RNTypingDNARecorderMobile: NSObject {
     
     // Main initialization params
     
@@ -46,7 +49,7 @@ open class RNTypingDNARecorderMobile {
     static var diagramRecording = true;
     static var motionFixedData = true;
     static var motionArrayData = true;
-    static let version = 3.0;
+    static let version = 3.1;
     fileprivate static var flags = "3"; // SWIFT (4.2) for IOS
     fileprivate static var maxSeekTime = 1500;
     fileprivate static var maxPressTime = 300;
@@ -79,19 +82,44 @@ open class RNTypingDNARecorderMobile {
     static var targetIds = [String]();
     fileprivate static var lastTarget = "";
     fileprivate static var lastTargetFound = false;
-    fileprivate static var screenWidth = UIScreen.main.bounds.width;
-    fileprivate static var screenHeight = UIScreen.main.bounds.height;
+    fileprivate static var screenWidth = UIScreen.main.bounds.width * UIScreen.main.nativeScale;
+    fileprivate static var screenHeight = UIScreen.main.bounds.height * UIScreen.main.nativeScale;
     fileprivate static var initialized = false;
     static var kpTimer:Timer = Timer();
+    fileprivate static var logLevel = 0;
+    fileprivate static var debugMode = false;
     
-    
-    public init() {
+    public override init() {
+        RNTypingDNARecorderMobile.log(message: "[TypingDNA] Creating the recorder...", level: 1);
         if (!RNTypingDNARecorderMobile.initialized) {
-            RNTypingDNARecorderMobile.initialized = RNTypingDNARecorderMobile.initialize();
+            RNTypingDNARecorderMobile.log(message: "[TypingDNA] The recorder was not initialized...", level: 1);
+            RNTypingDNARecorderMobile.initialized = RNTypingDNARecorderMobile._initialize();
         }
     }
     
-    static public func initialize() -> Bool {
+    @objc
+    static public func debuggingMode(_debugMode: Bool, _logLevel: Int) {
+        debugMode = _debugMode;
+        logLevel = _logLevel;
+    }
+    
+    static fileprivate func log(message: StaticString, level: Int, dso: UnsafeRawPointer = #dsohandle, _ args: CVarArg...) {
+        
+        if (debugMode && level <= logLevel) {
+            let ra = _swift_os_log_return_address()
+            message.withUTF8Buffer { (buf: UnsafeBufferPointer<UInt8>) in
+                buf.baseAddress!.withMemoryRebound(to: CChar.self, capacity: buf.count) { str in
+                    withVaList(args) { valist in
+                        _swift_os_log(dso, ra, .default, .default, str, valist)
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc
+    static public func _initialize() -> Bool {
+        log(message: "[TypingDNA] Initializing the recorder...", level: 1);
         for i in 0..<keyCodes.count {
             keyCodesObj[keyCodes[i]] = true;
         }
@@ -115,7 +143,9 @@ open class RNTypingDNARecorderMobile {
      * target:UITextField = nil; // (Optional, only for type 1/2) Get a typing pattern only for text typed in a certain text field.
      * caseSensitive:Bool = false; // (Optional, only for type 1/2) Used only if you pass a text for type 1/2
      */
+    @objc
     static public func getTypingPattern(type:Int, length:Int, text:String, textId:Int, target:UITextField?, caseSensitive:Bool) -> String {
+        log(message: "[TypingDNA] Get typing pattern called with { type: %d, length: %d, text: %@, textId: %d, target: %@, caseSensitive: %d }", level: 2, type, length, text, textId, String(target?.hashValue ?? -1), caseSensitive);
         if (type == 1) {
             return getDiagram(false, text, textId, length, target, caseSensitive);
         } else if (type == 2) {
@@ -125,27 +155,36 @@ open class RNTypingDNARecorderMobile {
         }
     }
     
+    @objc
     static public func getTypingPattern(_ type:Int, _ length:Int, _ text:String, _ textId:Int, _ target:UITextField?, _ caseSensitive:Bool) -> String {
+        log(message: "[TypingDNA] Get typing pattern called with { type: %d, length: %d, text: %@, textId: %d, target: %@, caseSensitive: %d }", level: 2, length, text, textId, String(target?.hashValue ?? -1), caseSensitive);
         return getTypingPattern(type:type, length:length, text:text, textId:textId, target:target, caseSensitive:caseSensitive);
     }
     
+    @objc
     static public func getTypingPattern(_ type:Int, _ length:Int, _ text:String, _ textId:Int, _ target:UITextField?) -> String {
+        log(message: "[TypingDNA] Get typing pattern called with { type: %d, length: %d, text: %@, textId: %d, target: %@, caseSensitive: %d }", level: 2, length, text, textId, String(target?.hashValue ?? -1), "false");
         return getTypingPattern(type:type, length:length, text:text, textId:textId, target:target, caseSensitive:false);
     }
     
+    @objc
     static public func getTypingPattern(_ type:Int, _ length:Int, _ text:String, _ textId:Int) -> String {
+        log(message: "[TypingDNA] Get typing pattern called with { type: %d, length: %d, text: %@, textId: %d, target: %@, caseSensitive: %d }", level: 2, type, length, text, textId, "N/A", "false");
         return getTypingPattern(type:type, length:length, text:text, textId:textId, target:nil, caseSensitive:false);
     }
     
     /**
      * Resets the history stack of recorded typing events (and mouse if all:true).
      */
+    @objc
     static public func reset(_ all: Bool) {
+        log(message: "[TypingDNA] Resetting the recorder...", level: 1);
         historyStack = [[Int]]();
         stackDiagram = [[Int]]();
         pt1 = getTime();
         ut1 = getTime();
     }
+    @objc
     static public func reset() {
         reset(false);
     }
@@ -154,7 +193,9 @@ open class RNTypingDNARecorderMobile {
      * Automatically called at initialization. It starts the recording of typing
      * events. You only have to call .start() to resume recording after a .stop()
      */
+    @objc
     static public func start() {
+        log(message: "[TypingDNA] Starting the recorder v3.1...", level: 1);
         recording = true;
         diagramRecording = true;
     }
@@ -162,7 +203,9 @@ open class RNTypingDNARecorderMobile {
     /**
      * Ends the recording of further typing events.
      */
+    @objc
     static public func stop() {
+        log(message: "[TypingDNA] Stopping the recorder...", level: 1);
         recording = false;
         diagramRecording = false;
     }
@@ -170,8 +213,10 @@ open class RNTypingDNARecorderMobile {
     /**
      * Adds a target to the targetIds array.
      */
+    @objc
     static public func addTarget(_ targetField:UITextField) {
         let target = String(targetField.hashValue);
+        log(message: "[TypingDNA] Adding a target { target: %@, previous: %@ }", level: 1, targetIds.debugDescription);
         let targetLength = targetIds.count;
         var targetFound = false;
         if (targetLength > 0) {
@@ -183,35 +228,47 @@ open class RNTypingDNARecorderMobile {
             }
             if (!targetFound) {
                 targetIds.append(target);
+                KIOSlastText.updateValue(targetField.text ?? "", forKey: String(targetField.hash));
+                targetField.addTarget(self, action: #selector(UIW_KIOSkeyReleased(_:)), for: .editingChanged);
             }
         } else {
             targetIds.append(target);
+            KIOSlastText.updateValue(targetField.text ?? "", forKey: String(targetField.hash));
+            targetField.addTarget(self, action: #selector(UIW_KIOSkeyReleased(_:)), for: .editingChanged);
         }
     }
     
     /**
      * Adds a target to the targetIds array.
      */
+    @objc
     static public func removeTarget(_ targetField:UITextField) {
         let target = String(targetField.hashValue);
+        log(message: "[TypingDNA] Removing a target { target: %@ }", level: 1, target);
         let targetLength = targetIds.count;
         if (targetLength > 0) {
             for i in 0..<targetLength {
                 if (targetIds[i] == target) {
                     targetIds.remove(at: i);
+                    KIOSlastText.removeValue(forKey: String(targetField.hash));
+                    targetField.removeTarget(nil, action: nil, for: .editingChanged);
                     break;
                 }
             }
         }
     }
     
+    @objc
     static public func keyReleased(_ keyCode: Int, _ keyChar: Int, _ modifiers: Bool, _ upTime:Int, _ target:String, _ kpGet:[Any], _ xy:String) {
         if ((!recording && !diagramRecording) || keyCode >= maxKeyCode) {
+            log(message: "[TypingDNA] Recording is stopped or invalid key code { keyCode: %d }", level: 2, keyCode);
             return;
         }
         if (!isTarget(target)) {
+            log(message: "[TypingDNA] Received key is for an invalid target { target: %@ }", level: 2, target);
             return;
         }
+        log(message: "[TypingDNA] Key released { keyCode: %d, keyChar: %d, modifiers: %d, upTime: %d, target: %@, kpGet: %@, xy: %@", level: 2, keyCode, keyChar, modifiers, upTime, target, kpGet.debugDescription, xy);
         let t0 = ut1;
         ut1 = upTime;
         let seekTime = ut1 - t0;
@@ -234,13 +291,16 @@ open class RNTypingDNARecorderMobile {
         }
     }
     
+    @objc
     static public func fnv1a(_ str: String) -> String {
+        log(message: "[TypingDNA] Hashing { str: %@ }", level: 3, str);
         return String(fnv1a_32(bytes: str.utf8));
     }
     
     // Private functions
     
     fileprivate static func getSpecialKeys() -> String {
+        log(message: "[TypingDNA] Getting special keys...", level: 3);
         var returnArr = [Int]();
         let length = historyStack.count;
         var historyStackObj = [Int:[Int]]();
@@ -285,13 +345,16 @@ open class RNTypingDNARecorderMobile {
             returnArr.append(-1);
             returnArr.append(-1);
             let returnStrArr:[String] = returnArr.map({String(describing: $0)});
+            log(message: "[TypingDNA] Special keys { keys: %@ }", level: 3, returnStrArr.debugDescription);
             return returnStrArr.joined(separator: ",");
         } else {
+            log(message: "[TypingDNA] Default special keys { keys: %@ }", level: 3, "0,-1,-1,0,-1,-1,0,-1,-1,0,-1,-1,0,-1,-1");
             return "0,-1,-1,0,-1,-1,0,-1,-1,0,-1,-1,0,-1,-1";
         }
     }
     
     fileprivate static func historyAdd(_ arr: [Any]) {
+        log(message: "[TypingDNA] Adding to history stack { arr: %@ }", level: 2, arr.debugDescription);
         historyStack.append(arr);
         if (historyStack.count > maxHistoryLength) {
             historyStack.remove(at: 0);
@@ -299,10 +362,12 @@ open class RNTypingDNARecorderMobile {
     }
     
     fileprivate static func historyAddDiagram(_ arr: [Any]) {
+        log(message: "[TypingDNA] Adding to stack diagram { arr: %@ }", level: 2, arr.debugDescription);
         stackDiagram.append(arr);
     }
     
     fileprivate static func getSeek(_ length: Int) -> [Int] {
+        log(message: "[TypingDNA] Get seek { length: %d }", level: 3, length);
         var length = length;
         let historyTotalLength = historyStack.count;
         if (length > historyTotalLength) {
@@ -317,10 +382,12 @@ open class RNTypingDNARecorderMobile {
                 }
             }
         }
+        log(message: "[TypingDNA] Seek array is { seekArr: %@ }", level: 3, seekArr.debugDescription);
         return seekArr;
     }
     
     fileprivate static func getPress(_ length: Int) -> [Int] {
+        log(message: "[TypingDNA] Getting press { length: %d }", level: 2, length);
         var length = length;
         let historyTotalLength = historyStack.count;
         if (length > historyTotalLength) {
@@ -335,6 +402,7 @@ open class RNTypingDNARecorderMobile {
                 }
             }
         }
+        log(message: "[TypingDNA] Press array is { pressArr: %@ }", level: 2, pressArr.debugDescription);
         return pressArr;
     }
     
@@ -349,6 +417,7 @@ open class RNTypingDNARecorderMobile {
     }
     
     fileprivate static func getDiagram(_ extended: Bool,_ str: String,_ textId: Int,_ tpLength: Int,_ target:UITextField?,_ caseSensitive: Bool) -> String {
+        log(message: "[TypingDNA] Getting the diagram { extended: %d, str: %@, textId: %d, tpLength: %d, target: %@, caseSensitive: %d }", level: 2, extended, str, textId, tpLength, String(target?.hashValue ?? -1), caseSensitive);
         var returnStr:String = "";
         var motionArr:[String] = [];
         var kpzaArr:[String] = [];
@@ -365,6 +434,7 @@ open class RNTypingDNARecorderMobile {
             }
             if (str == "") {
                 str = target!.text!;
+                log(message: "[TypingDNA] New str value { str: %@ }", level: 2, str);
             }
         }
         var missingCount = 0;
@@ -396,6 +466,7 @@ open class RNTypingDNARecorderMobile {
             for i in 0..<str.count {
                 let index = str.index(str.startIndex, offsetBy: i);
                 if (UnicodeScalar(String(strUpper[index])) == nil) {
+                    log(message: "[TypingDNA] Unicode error", level: 2);
                     return "unicode error";
                 }
                 let currentCharCode = Int(UnicodeScalar(String(str[index]))!.value);
@@ -495,6 +566,7 @@ open class RNTypingDNARecorderMobile {
                 }
                 if (replaceMissingKeysPerc < missingCount * 100 / strLength) {
                     returnStr = returnStr0;
+                    log(message: "[TypingDNA] Diagram is empty (too many missing keys) { missingCount: %d, strLength: %d }", level: 2, missingCount, strLength);
                     return "";
                 }
             }
@@ -539,10 +611,12 @@ open class RNTypingDNARecorderMobile {
             returnStr += "/" + kpxrArr.map({String(describing:$0)}).joined(separator: "|");
             returnStr += "/" + kpyrArr.map({String(describing:$0)}).joined(separator: "|");
         }
+        log(message: "[TypingDNA] Diagram is { returnStr: %@ } ", level: 2, returnStr);
         return returnStr;
     }
     
     fileprivate static func get(_ length: Int) -> String {
+        log(message: "[TypingDNA] Getting typing pattern { length: %d }", level: 3, length);
         let historyTotalLength = historyStack.count;
         var length = length;
         if (length == 0) {
@@ -736,16 +810,27 @@ open class RNTypingDNARecorderMobile {
             arr.append(getSpecialKeys());
             arr.append(getDeviceSignature());
             let typingPattern:String = arr.joined(separator: ",");
+            log(message: "[TypingDNA] Typing pattern is { typingPattern: %@ } ", level:
+                3, typingPattern);
             return typingPattern;
         } else {
+            log(message: "[TypingDNA] Typing pattern is empty", level: 3);
             return "";
         }
     }
     
+    @objc
     static public func getDeviceSignature() -> String {
+        log(message: "[TypingDNA] Getting device signature...", level: 3);
         let deviceType = 2; // {0:unknown, 1:pc, 2:phone, 3:tablet}
-        let deviceModel = 0; // fnv1aHash of device manufacturer + "-" + model
-        let deviceId = 0; // fnv1aHash of device id
+        let deviceModel = padRight(s: fnv1a("Apple"), n: 12) + fnv1a(UIDevice.current.modelName); // fnv1aHash of device manufacturer + "-" + model
+        let deviceId: String;
+        if let uuid = UIDevice.current.identifierForVendor?.uuidString {
+            deviceId = fnv1a(uuid);
+        }
+        else {
+            deviceId = "0";
+        }
         let isMobile = 2; // {0:unknown, 1:pc, 2:mobile}
         let operatingSystem = 5; // {0:unknown/other, 1:Windows, 2:MacOS, 3:Linux, 4:ChromeOS, 5:iOS, 6: Android}
         let programmingLanguage = 3; // {0:unknown, 1:JavaScript, 2:Java, 3:Swift, 4:C++, 5:C#, 6:AndroidJava}
@@ -759,7 +844,15 @@ open class RNTypingDNARecorderMobile {
         let browserType = 0; // {0:unknown, 1:Chrome, 2:Firefox, 3:Opera, 4:IE, 5: Safari, 6: Edge, 7:AndroidWK}
         let displayWidth = screenWidth; // screen width in pixels
         let displayHeight = screenHeight; // screen height in pixels
-        let orientation = (screenWidth > screenHeight) ? 2 : 1; // {0:unknown, 1:portrait, 2:landscape}
+        let orientation: Int;
+        switch UIApplication.shared.statusBarOrientation {
+        case UIInterfaceOrientation.portrait, UIInterfaceOrientation.portraitUpsideDown:
+            orientation = 1;
+        case UIInterfaceOrientation.landscapeLeft, UIInterfaceOrientation.landscapeRight:
+            orientation = 2;
+        default:
+            orientation = 1;
+        }
         let osVersion = Int(String(ProcessInfo.processInfo.operatingSystemVersion.majorVersion) + String(ProcessInfo.processInfo.operatingSystemVersion.minorVersion))!; // numbers only
         let browserVersion = 0; // numbers only
         let cookieId = 0; // only in iframe
@@ -770,16 +863,30 @@ open class RNTypingDNARecorderMobile {
         
         let returnArr:[String] = [deviceType,deviceModel,deviceId,isMobile,operatingSystem,programmingLanguage,systemLanguage,isTouchDevice,pressType,keyboardInput,keyboardType,pointerInput,browserType,displayWidth,displayHeight,orientation,osVersion,browserVersion,cookieId,signature].map({String(describing: $0)});
         let returnStr = returnArr.joined(separator: ",");
+        log(message: "[TypingDNA] Device signature is { returnStr: %@ }", level: 3, returnStr);
         return returnStr;
     }
     
+    @objc
+    static fileprivate func padRight(s: String, n: Int) -> String {
+        let lengthDiff = n - s.count;
+        if (lengthDiff <= 0) {
+            return s;
+        }
+        return s + String(repeating: "0", count: (n - s.count));
+    }
+    
+    @objc
     static public func getTime() -> Int{
         return Int(CACurrentMediaTime()*1000);
     }
     
     // Filter outliers
+    @objc
     fileprivate static func fo(_ arr: [Double]) -> [Double] {
+        log(message: "[TypingDNA] Filtering outliers { arr: %@ }", level: 3, arr.debugDescription);
         if (arr.count < 1) {
+            log(message: "[TypingDNA] Outliers filtered { arr: %@ }", level: 3, arr.debugDescription);
             return arr;
         }
         var values = arr.sorted {$0 < $1};
@@ -793,18 +900,25 @@ open class RNTypingDNARecorderMobile {
             minVal = 0;
         }
         let fVal = values.filter {$0 < maxVal && $0 > minVal};
+        log(message: "[TypingDNA] Outliers filtered { fVal: %@ }", level: 3, fVal.debugDescription);
         return fVal;
     }
+    
     fileprivate static func fo(_ arr: [Int]) -> [Int] {
+        log(message: "[TypingDNA] Filtering outliers { arr: %@ }", level: 3, arr.debugDescription);
         let arr = arr.map({Double($0)});
         let rarr = fo(arr);
-        return rarr.map({Int($0)});
+        let returnArr = rarr.map({Int($0)});
+        log(message: "[TypingDNA] Outliers filtered { returnArr: %@ }", level: 3, returnArr.debugDescription);
+        return returnArr;
     }
     
     // Target functions
-    
+    @objc
     fileprivate static func isTarget(_ target:String) -> Bool {
+        log(message: "[TypingDNA] Is target { target: %@ }", level: 2, target);
         if (lastTarget == target && lastTargetFound) {
+            log(message: "[TypingDNA] Is a target", level: 2);
             return true;
         } else {
             let targetLength = targetIds.count;
@@ -818,16 +932,20 @@ open class RNTypingDNARecorderMobile {
                 }
                 lastTarget = target;
                 lastTargetFound = targetFound;
+                log(message: "[TypingDNA] Target found? { tragetFound: %d }", level: 2, targetFound);
                 return targetFound;
             } else {
                 lastTarget = target;
                 lastTargetFound = true;
+                log(message: "[TypingDNA] Is a target", level: 2);
                 return true;
             }
         }
     }
     
+    @objc
     fileprivate static func sliceStackByTargetId(_ stack:[[Any]], _ targetId:String) -> [[Any]] {
+        log(message: "[TypingDNA] Slice stack by target id { stack %@, targetId: %@ }", level: 2, stack.debugDescription, targetId);
         let length = stack.count;
         var newStack = [[Any]]();
         for i in 0..<length {
@@ -836,6 +954,7 @@ open class RNTypingDNARecorderMobile {
                 newStack.append(arr);
             }
         }
+        log(message: "[TypingDNA] Sliced stack { newStack: %@ }", level: 2, newStack.debugDescription);
         return newStack;
     }
     
@@ -857,8 +976,8 @@ open class RNTypingDNARecorderMobile {
         }
         return rd(sum/len, 4);
     }
-    fileprivate static func avg(_ arr: [Int]) -> Double {
-        return avg(arr.map({Double($0)}));
+    fileprivate static func avg(_ intArr: [Int]) -> Double {
+        return avg(intArr.map({Double($0)}));
     }
     
     fileprivate static func sd(_ arr: [Double]) -> Double {
@@ -901,8 +1020,9 @@ open class RNTypingDNARecorderMobile {
     fileprivate static var kpLastRoll = 0;
     fileprivate static var kpLastAccZ = 0;
     
-    
+    @objc
     static public func startRecordMotion() {
+        log(message: "[TypingDNA] Starting motion recording...", level: 2);
         let interval = 1.0 / 60.0; // Hz
         accQueue.maxConcurrentOperationCount = 2;
         gyroQueue.maxConcurrentOperationCount = 2;
@@ -912,6 +1032,7 @@ open class RNTypingDNARecorderMobile {
             motion.startAccelerometerUpdates(to: self.accQueue, withHandler: { (data, error) in
                 if let dataA = data {
                     if(resetAccData) {
+                        log(message: "[TypingDNA] Resetting accelerometer data...", level: 2);
                         kpAccZ.removeAll();
                         kpTimes.removeAll();
                         resetAccData = false;
@@ -930,6 +1051,11 @@ open class RNTypingDNARecorderMobile {
                         if (kpTimes.count > 21) {
                             kpTimes.remove(at: 0);
                         }
+                        
+                        let pitch = atan2(Float(-kpCurAccY), sqrt(Float(kpCurAccX * kpCurAccX + kpCurAccZ * kpCurAccZ))) * 180 / Float.pi;
+                        let roll = atan2(Float(-kpCurAccX), sqrt(Float(kpCurAccY * kpCurAccY + kpCurAccZ * kpCurAccZ))) * 180 / Float.pi;
+                        kpLastPitch = Int(pitch * 10);
+                        kpLastRoll = Int(roll * 10);
                     }
                 }
             });
@@ -939,6 +1065,7 @@ open class RNTypingDNARecorderMobile {
             motion.startGyroUpdates(to: self.gyroQueue, withHandler: { (data, error) in
                 if let dataG = data {
                     if(resetGyroData) {
+                        log(message: "[TypingDNA] Resetting gyroscope data...", level: 2);
                         kpX.removeAll();
                         kpY.removeAll();
                         resetGyroData = false;
@@ -959,25 +1086,12 @@ open class RNTypingDNARecorderMobile {
                 }
             });
         }
-        if motion.isDeviceMotionAvailable {
-            motion.deviceMotionUpdateInterval = interval;
-            motion.startDeviceMotionUpdates(to: self.motionQueue, withHandler: { (data, error) in
-                if let dataM = data {
-                    let pitch:Double = 100*Double(dataM.attitude.pitch);
-                    let roll:Double = 100*Double(dataM.attitude.roll);
-                    kpLastRoll = Int(5.625 * roll);
-                    var beta = Int(5.625 * pitch);
-                    if (abs(kpLastRoll) > 900) {
-                        beta = ((beta > 0) ? 1800 : -1800) - beta;
-                    }
-                    kpLastPitch = beta;
-                }
-            });
-        }
         motionStarted = true;
     }
     
+    @objc
     static public func stopRecordMotion() {
+        log(message: "[TypingDNA] Stopping motion recording...", level: 2);
         if motion.isAccelerometerAvailable {
             motion.stopAccelerometerUpdates();
         }
@@ -990,15 +1104,23 @@ open class RNTypingDNARecorderMobile {
         motionStarted = false;
     }
     
+    @objc
     static public func getDeviceMotion(_ full: Bool) -> [Int] {
+        log(message: "[TypingDNA] Getting device motion { full: %d }", level: 2, full);
         if (!motionStarted) {
+            log(message: "[TypingDNA] Device motion wasn't started...", level: 2);
             startRecordMotion();
         }
         var returnArr:[Int] = [];
+        var kpCurAccX = 0, kpCurAccY = 0, kpCurAccZ = 0;
         if let dataA = motion.accelerometerData {
             returnArr.append(-Int(1000*Double(dataA.acceleration.x)));
             returnArr.append(-Int(1000*Double(dataA.acceleration.y)));
             returnArr.append(-Int(1000*Double(dataA.acceleration.z)));
+            
+            kpCurAccX = -Int(1000*Double(dataA.acceleration.x));
+            kpCurAccY = -Int(1000*Double(dataA.acceleration.y));
+            kpCurAccZ = -Int(1000*Double(dataA.acceleration.z));
         } else {
             returnArr.append(0);
             returnArr.append(0);
@@ -1014,28 +1136,22 @@ open class RNTypingDNARecorderMobile {
             returnArr.append(0);
         }
         if (full) {
-            if let dataM = motion.deviceMotion {
-                let pitch:Double = 100*Double(dataM.attitude.pitch);
-                let roll:Double = 100*Double(dataM.attitude.roll);
-                let gamma = Int(5.625 * roll);
-                var beta = Int(5.625 * pitch);
-                if (abs(gamma) > 900) {
-                    beta = ((beta > 0) ? 1800 : -1800) - beta;
-                }
-                returnArr.append(beta);
-                returnArr.append(gamma);
-            } else {
-                returnArr.append(0);
-                returnArr.append(0);
-            }
+            let pitch = atan2(Float(-kpCurAccY), sqrt(Float(kpCurAccX * kpCurAccX + kpCurAccZ * kpCurAccZ))) * 180 / Float.pi;
+            let roll = atan2(Float(-kpCurAccX), sqrt(Float(kpCurAccY * kpCurAccY + kpCurAccZ * kpCurAccZ))) * 180 / Float.pi;
+            returnArr.append(Int(pitch * 10));
+            returnArr.append(Int(roll * 10));
         }
+        log(message: "[TypingDNA] Device motion { returnArr: %@ }", level: 2, returnArr.debugDescription);
         return returnArr;
     }
     
+    @objc
     fileprivate static func kpADifArr(_ arr:[Int]) -> [[Int]] {
+        log(message: "[TypingDNA] kpADiffArr { arr: %@ }", level: 3, arr.debugDescription);
         let length = arr.count - 1;
         var firstArr:[Int] = [0];
         if (length < 2) {
+            log(message: "[TypingDNA] kpADiffArr empty...", level: 3);
             return [[0],[0]];
         }
         var newArr:[Int] = [];
@@ -1049,13 +1165,17 @@ open class RNTypingDNARecorderMobile {
             newArr.append(newVal);
             returnArr.append(abs(newVal));
         }
+        log(message: "[TypingDNA] kpADiffArr { newArr: %@, returnArr: %@ }", level: 3, newArr.debugDescription, returnArr.debugDescription);
         return [newArr, returnArr];
     }
     
+    @objc
     fileprivate static func kpRDifArr(_ arr:[Int]) -> [[Int]] {
+        log(message: "[TypingDNA] kpRDifArr { arr: %@ }", level: 3, arr.debugDescription);
         let length = arr.count - 2;
         var firstArr:[Int] = [];
         if (length < 0) {
+            log(message: "[TypingDNA] kpRDifArr empty...", level: 3);
             return [[0],[0]];
         }
         var localMax = 0;
@@ -1079,10 +1199,13 @@ open class RNTypingDNARecorderMobile {
             firstArr.append(newVal);
         }
         let returnArr:[Int] = [posMax-1, posMax, posMax+1, posMax+2, posMax+3, posMin-1, posMin, posMin+1, posMin+2, posMin+3];
+        log(message: "[TypingDNA] kpRDifArr { firstArr: %@, returnArr: %@ }", level: 3, firstArr.debugDescription, returnArr.debugDescription);
         return [firstArr, returnArr];
     }
     
+    @objc
     fileprivate static func kpGetAll() -> [Any] {
+        log(message: "[TypingDNA] kpGetAll called...", level: 3);
         var _kpAccZ = kpAccZ;
         var _kpTimes = kpTimes;
         var _kpX = kpX;
@@ -1091,6 +1214,7 @@ open class RNTypingDNARecorderMobile {
             let returnVal = (KIOSlastPressTime >= KIOSlast2ReleaseTime) ? KIOSlastPressTime : 0;
             let returnMotionArr = getDeviceMotion(true).map({String(describing:$0)})
             let returnMotionStr = returnMotionArr.joined(separator: ",");
+            log(message: "[TypingDNA] kpGetAll { return: %@ }", level: 3, [returnVal, returnMotionStr, "0", "0", "0"].debugDescription);
             return [returnVal, returnMotionStr, "0", "0", "0"];
         } else {
             let kpZA2 = kpADifArr(_kpAccZ);
@@ -1154,6 +1278,7 @@ open class RNTypingDNARecorderMobile {
             let kp1 = kp1arr.joined(separator: ",");
             let kp2 = kp2arr.joined(separator: ",");
             let kp3 = kp3arr.joined(separator: ",");
+            log(message: "[TypingDNA] kpGetAll { return: %@ }", level: 3, [returnVal, kp0, kp1, kp2, kp3].debugDescription);
             return [returnVal, kp0, kp1, kp2, kp3];
         }
     }
@@ -1166,7 +1291,7 @@ open class RNTypingDNARecorderMobile {
     static var KIOSlastReleaseTime:Int = 0;
     static var KIOSlast2ReleaseTime:Int = 0;
     static var KIOSkeyboardOn = false;
-    static var KIOSlastText = "";
+    static var KIOSlastText: Dictionary<String, String> = [:];
     static var KIOSlastTimeStamp:String = "";
     static var KIOSlastDeviceMotionArr:[Int] = [];
     static var KIOSpointX = -1;
@@ -1174,14 +1299,17 @@ open class RNTypingDNARecorderMobile {
     static var pressWorks = false;
     
     
+    @objc
     static public func KIOSkeyPressed(_ point:CGPoint) {
+        log(message: "[TypingDNA] Key pressed { KIOSkeyboardOn: %d }", level: 2, KIOSkeyboardOn);
         if (KIOSkeyboardOn) {
             let time = getTime();
             if (time != KIOSlastPressTime) {
                 KIOSlastPressTime = time;
-                KIOSlastText = String(describing: KIOScurrentResponder.text!);
+                KIOSlastText.updateValue(String(describing: KIOScurrentResponder.text!), forKey: String(KIOScurrentResponder.hash));
                 KIOSpointX = Int(Double(point.x));
                 KIOSpointY = Int(Double(point.y));
+                log(message: "[TypingDNA] Key pressed info { lastPressTime: %d, lastText: %@, x: %d, y: %d }", level: 2, KIOSlastPressTime, KIOSlastText, KIOSpointX, KIOSpointY);
                 if (!pressWorks) {
                     pressWorks = true;
                 }
@@ -1189,18 +1317,21 @@ open class RNTypingDNARecorderMobile {
         }
     }
     
+    @objc
     static public func KIOSkeyReleased(_ target:String) {
+        log(message: "[TypingDNA] Key released { target: %@ }", level: 2, target);
         let time = getTime();
         if (time != KIOSlastReleaseTime) {
             KIOSlast2ReleaseTime = KIOSlastReleaseTime;
             KIOSlastReleaseTime = time;
             let currentText = String(describing: KIOScurrentResponder.text!);
-            if (currentText.count - 1 != KIOSlastText.count) {
+            if (currentText.count - 1 != KIOSlastText[target]?.count ?? 0) {
                 //print("delete/backspace/swap");
-                KIOSlastText = currentText;
+                KIOSlastText.updateValue(currentText, forKey: target);
+                log(message: "[TypingDNA] No text change { KIOSlastText: %@ }", level: 2, KIOSlastText[target] ?? "");
                 return;
             }
-            KIOSlastText = currentText;
+            KIOSlastText.updateValue(currentText, forKey: target);
             if (KIOSgetCharacterBeforeCursor() != nil) {
                 let currentChar = String(describing: KIOSgetCharacterBeforeCursor()!);
                 let currentCharUp = currentChar.uppercased();
@@ -1210,6 +1341,7 @@ open class RNTypingDNARecorderMobile {
                 let keyCode = Int(sup[sup.startIndex].value);
                 if (keyCode == 65039 || keyCode == 65533) {
                     //print("emoji");
+                    log(message: "[TypingDNA] Got emoji", level: 2);
                     return;
                 }
                 drkc[lastPressedKey] = keyChar;
@@ -1218,31 +1350,44 @@ open class RNTypingDNARecorderMobile {
                 let xy = String(KIOSpointX) + "," + String(KIOSpointY);
                 keyReleased(keyCode, keyChar, modifiers, KIOSlastReleaseTime, target, kpGet, xy);
             } else {
+                log(message: "[TypingDNA] Character before cursor is nil", level: 2);
                 return;
             }
         }
     }
     
+    @objc
     static public func KIOSgetCharacterBeforeCursor() -> String? {
         let textField = KIOScurrentResponder;
         if let cursorRange = textField.selectedTextRange {
             if let newPosition = textField.position(from: cursorRange.start, offset: -1) {
                 let range = textField.textRange(from: newPosition, to: cursorRange.start)
+                let charactersBeforeCursor = textField.text(in: range!);
+                log(message: "[TypingDNA] Characters before cursor { return: %@ }", level: 2, charactersBeforeCursor ?? "nil");
                 return textField.text(in: range!)
             }
         }
+        log(message: "[TypingDNA] Characters before cursor { return: %@ }", level: 2, "nil");
         return nil
     }
     
+    @objc
+    static func UIW_KIOSkeyReleased(_ sender: UITextField) {
+        let targetHash = String(sender.hash);
+        log(message: "[TypingDNA] KIOSkeyReleased sender { hash: %@, text: %@ }", level: 2, targetHash, sender.text ?? "");
+        KIOScurrentResponder = sender;
+        KIOSkeyReleased(targetHash);
+        KIOSlastText.updateValue(String(describing: sender.text!), forKey: targetHash);
+    }
 }
 
 // UIWindow extension for catching iOS press/release events.
-
 extension UIWindow {
     
     override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let view = super.hitTest(point, with: event);
         if (!RNTypingDNARecorderMobile.KIOSdidSetup) {
+            RNTypingDNARecorderMobile.log(message: "[TypingDNA] KIOS did setup", level: 1);
             NotificationCenter.default.addObserver(self, selector: #selector(self.UIW_KIOSkeyboardDidShow(_:)), name: UIResponder.keyboardDidShowNotification, object: nil);
             NotificationCenter.default.addObserver(self, selector: #selector(self.UIW_KIOSkeyboardDidHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil);
             RNTypingDNARecorderMobile.KIOSdidSetup = true;
@@ -1251,7 +1396,6 @@ extension UIWindow {
             let time = String(event!.timestamp);
             if (time != RNTypingDNARecorderMobile.KIOSlastTimeStamp) {
                 RNTypingDNARecorderMobile.KIOSkeyPressed(point);
-                UIW_KIOSsetResponder();
                 RNTypingDNARecorderMobile.KIOSlastTimeStamp = time;
             }
         }
@@ -1259,7 +1403,6 @@ extension UIWindow {
     }
     
     @objc func UIW_KIOSkeyboardDidShow(_ notification: NSNotification) {
-        UIW_KIOSsetResponder();
         RNTypingDNARecorderMobile.startRecordMotion();
         RNTypingDNARecorderMobile.KIOSkeyboardOn = true;
     }
@@ -1268,39 +1411,18 @@ extension UIWindow {
         RNTypingDNARecorderMobile.stopRecordMotion();
         RNTypingDNARecorderMobile.KIOSkeyboardOn = false;
     }
-    
-    @objc func UIW_KIOSkeyReleased(_ sender: UITextInput) {
-        let targetHash = String(sender.hash);
-        RNTypingDNARecorderMobile.KIOSkeyReleased(targetHash);
-    }
-    
-    @objc func UIW_KIOSsetResponder() {
-        if let x = UIResponder.current as? UITextField {
-            if x != RNTypingDNARecorderMobile.KIOScurrentResponder {
-                RNTypingDNARecorderMobile.KIOScurrentResponder = x;
-                RNTypingDNARecorderMobile.KIOSlastText = String(describing: x.text!);
-                RNTypingDNARecorderMobile.KIOScurrentResponder.removeTarget(nil, action: nil, for: .editingChanged);
-                RNTypingDNARecorderMobile.KIOScurrentResponder.addTarget(self, action: #selector(UIW_KIOSkeyReleased(_:)), for: .editingChanged);
-            }
+}
+
+
+extension UIDevice {
+    var modelName: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
         }
+        return identifier
     }
 }
-
-// UIResponder extension. Returns current responder when asked from extended UIWindow.
-
-extension UIResponder {
-    
-    private weak static var _currentFirstResponder: UIResponder? = nil
-    
-    public static var current: UIResponder? {
-        UIResponder._currentFirstResponder = nil
-        UIApplication.shared.sendAction(#selector(findFirstResponder(sender:)), to: nil, from: nil, for: nil)
-        return UIResponder._currentFirstResponder
-    }
-    
-    @objc internal func findFirstResponder(sender: AnyObject) {
-        UIResponder._currentFirstResponder = self
-    }
-}
-
-
