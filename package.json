@@ -1,6 +1,6 @@
 {
   "name": "typingdnarecorder-react-native",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "TypingDNA Recorder for React Native",
   "main": "index.js",
   "scripts": {
