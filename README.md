@@ -14,11 +14,9 @@
 
 #### iOS
 
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `typingdnarecorder-react-native` and add `RNTypingdnarecorder.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNTypingdnarecorder.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. In order for the Xcode project to build when you use Swift in the iOS static libary you include in the module, your main app project must contain Swift code and a bridging header itself. If your app does not contain Swift code, you can add an empty Swift source file with a bridging header to the project.
-5. Run your project (`Cmd+R`)
+1. In **ios/Podfile** add the following line in the **target** block `pod 'typingdnarecorder-react-native', :path => '../node_modules/typingdnarecorder-react-native'` and run `pod install`.
+2. In order for the Xcode project to build when you use Swift in the iOS static libary you include in the module, your main app project must contain Swift code and a bridging header itself. If your app does not contain Swift code, you can add an empty Swift source file with a bridging header to the project.
+3. Run your project (`Cmd+R`)
 
 #### Android
 
@@ -34,10 +32,9 @@
   	```
       implementation project(':typingdnarecorder-react-native')
   	```
-4. Edit the following lines in `build.gradle`:
+4. Edit the following lines in `build.gradle` (if your version is higher skip this step):
 		```
 			buildToolsVersion = "28.0.3"
-			minSdkVersion = 19
 			compileSdkVersion = 28
 			targetSdkVersion = 28
 			supportLibVersion = "28.0.0"
@@ -83,19 +80,26 @@ Where:
   
   
 ```javascript
-import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, Button, Platform} from 'react-native';
+import React from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Button,
+  Platform,
+} from 'react-native';
+
 import tdna from 'typingdnarecorder-react-native';
 
 type Props = {};
-export default class App extends Component<Props> {
-
+export default class App extends React.Component<Props> {
   constructor(props) {
     super(props);
 
     this.state = {
-      pattern: "",
-      text: ""
+      pattern: '',
+      text: '',
     };
   }
 
@@ -106,18 +110,18 @@ export default class App extends Component<Props> {
       tdna.addTarget(this.targetId);
     }, 1000);
   }
-                                                     
+
   componentWillUnmount() {
     tdna.stop();
   }
 
   reset() {
     tdna.reset();
-    this.setState({pattern: "", text: ""});
+    this.setState({pattern: '', text: ''});
   }
 
   getTypingPattern() {
-    tdna.getTypingPattern(0, 0, "", 0, this.targetId, false, (tp) => {
+    tdna.getTypingPattern(2, 0, '', 0, this.targetId, false, (tp) => {
       this.setState({pattern: tp});
     });
   }
@@ -127,28 +131,32 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <Text style={styles.welcome}>Pattern</Text>
         <Text style={styles.instructions}>{this.state.pattern}</Text>
-        
+
         <TextInput
-          ref={ref => { if (!this.targetId && ref && ref._inputRef && ref._inputRef._nativeTag) {
-            if (Platform.OS === 'ios') {
-              this.targetId = ref.props.placeholder;
+          ref={(ref) => {
+            if (!this.targetId && ref) {
+              if (Platform.OS === 'ios') {
+                // TextInput placeholder
+                this.targetId = 'Enter text';
+              } else {
+                this.targetId = ref._nativeTag;
+              }
             }
-            else {
-              this.targetId = ref._inputRef._nativeTag;
-            }
-          }}}
-          placeholder={"Enter text"} 
+          }}
+          placeholder={'Enter text'}
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
-          />
+        />
 
-        <View style={{flex: 1, flexDirection: "row", justifyContent: "space-around", alignItems: "flex-start"}}>
-        <Button
-          title={"Get"}
-          onPress={() => this.getTypingPattern()} />
-        <Button
-          title={"Reset"}
-          onPress={() => this.reset()} />
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: 'flex-start',
+          }}>
+          <Button title={'Get'} onPress={() => this.getTypingPattern()} />
+          <Button title={'Reset'} onPress={() => this.reset()} />
         </View>
       </View>
     );
