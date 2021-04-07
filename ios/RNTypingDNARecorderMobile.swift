@@ -140,11 +140,11 @@ open class RNTypingDNARecorderMobile: NSObject {
      * length:Int = 0; // (Optional) the length of the text in the history for which you want the typing pattern, 0 = ignore
      * text:String = ""; // (Only for type 1/2) a typed string that you want the typing pattern for
      * textId:Int = 0; // (Optional, only for type 1/2) a personalized id for the typed text, 0 = ignore
-     * target:UITextField = nil; // (Optional, only for type 1/2) Get a typing pattern only for text typed in a certain text field.
+     * target:UIView = nil; // (Optional, only for type 1/2) Get a typing pattern only for text typed in a certain text field/view.
      * caseSensitive:Bool = false; // (Optional, only for type 1/2) Used only if you pass a text for type 1/2
      */
     @objc
-    static public func getTypingPattern(type:Int, length:Int, text:String, textId:Int, target:UITextField?, caseSensitive:Bool) -> String {
+    static public func getTypingPattern(type:Int, length:Int, text:String, textId:Int, target:UIView?, caseSensitive:Bool) -> String {
         log(message: "[TypingDNA] Get typing pattern called with { type: %d, length: %d, text: %@, textId: %d, target: %@, caseSensitive: %d }", level: 2, type, length, text, textId, String(target?.hashValue ?? -1), caseSensitive);
         if (type == 1) {
             return getDiagram(false, text, textId, length, target, caseSensitive);
@@ -156,13 +156,13 @@ open class RNTypingDNARecorderMobile: NSObject {
     }
     
     @objc
-    static public func getTypingPattern(_ type:Int, _ length:Int, _ text:String, _ textId:Int, _ target:UITextField?, _ caseSensitive:Bool) -> String {
+    static public func getTypingPattern(_ type:Int, _ length:Int, _ text:String, _ textId:Int, _ target:UIView?, _ caseSensitive:Bool) -> String {
         log(message: "[TypingDNA] Get typing pattern called with { type: %d, length: %d, text: %@, textId: %d, target: %@, caseSensitive: %d }", level: 2, length, text, textId, String(target?.hashValue ?? -1), caseSensitive);
         return getTypingPattern(type:type, length:length, text:text, textId:textId, target:target, caseSensitive:caseSensitive);
     }
     
     @objc
-    static public func getTypingPattern(_ type:Int, _ length:Int, _ text:String, _ textId:Int, _ target:UITextField?) -> String {
+    static public func getTypingPattern(_ type:Int, _ length:Int, _ text:String, _ textId:Int, _ target:UIView?) -> String {
         log(message: "[TypingDNA] Get typing pattern called with { type: %d, length: %d, text: %@, textId: %d, target: %@, caseSensitive: %d }", level: 2, length, text, textId, String(target?.hashValue ?? -1), "false");
         return getTypingPattern(type:type, length:length, text:text, textId:textId, target:target, caseSensitive:false);
     }
@@ -214,7 +214,7 @@ open class RNTypingDNARecorderMobile: NSObject {
      * Adds a target to the targetIds array.
      */
     @objc
-    static public func addTarget(_ targetField:UITextField) {
+    static public func addTarget(_ targetField:UIView) {
         let target = String(targetField.hashValue);
         log(message: "[TypingDNA] Adding a target { target: %@, previous: %@ }", level: 1, targetIds.debugDescription);
         let targetLength = targetIds.count;
@@ -228,13 +228,27 @@ open class RNTypingDNARecorderMobile: NSObject {
             }
             if (!targetFound) {
                 targetIds.append(target);
-                KIOSlastText.updateValue(targetField.text ?? "", forKey: String(targetField.hash));
-                targetField.addTarget(self, action: #selector(UIW_KIOSkeyReleased(_:)), for: .editingChanged);
+                if (targetField is UITextField) {
+                    let targetTextField = targetField as! UITextField
+                    KIOSlastText.updateValue(targetTextField.text ?? "", forKey: String(targetField.hash));
+                    targetTextField.addTarget(self, action: #selector(UIW_KIOSkeyReleased(_:)), for: .editingChanged);
+                } else if (targetField is UITextView) {
+                    let targetTextView = targetField as! UITextView
+                    KIOSlastText.updateValue(targetTextView.text ?? "", forKey: String(targetField.hash));
+                    targetTextView.addTarget(self, action: #selector(UIW_KIOSkeyReleased(_:)), for: .editingChanged);
+                }
             }
         } else {
             targetIds.append(target);
-            KIOSlastText.updateValue(targetField.text ?? "", forKey: String(targetField.hash));
-            targetField.addTarget(self, action: #selector(UIW_KIOSkeyReleased(_:)), for: .editingChanged);
+            if (targetField is UITextField) {
+                let targetTextField = targetField as! UITextField
+                KIOSlastText.updateValue(targetTextField.text ?? "", forKey: String(targetField.hash));
+                targetTextField.addTarget(self, action: #selector(UIW_KIOSkeyReleased(_:)), for: .editingChanged);
+            } else if (targetField is UITextView) {
+                let targetTextView = targetField as! UITextView
+                KIOSlastText.updateValue(targetTextView.text ?? "", forKey: String(targetField.hash));
+                targetTextView.addTarget(self, action: #selector(UIW_KIOSkeyReleased(_:)), for: .editingChanged);
+            }
         }
     }
     
@@ -242,7 +256,7 @@ open class RNTypingDNARecorderMobile: NSObject {
      * Adds a target to the targetIds array.
      */
     @objc
-    static public func removeTarget(_ targetField:UITextField) {
+    static public func removeTarget(_ targetField:UIView) {
         let target = String(targetField.hashValue);
         log(message: "[TypingDNA] Removing a target { target: %@ }", level: 1, target);
         let targetLength = targetIds.count;
@@ -251,7 +265,13 @@ open class RNTypingDNARecorderMobile: NSObject {
                 if (targetIds[i] == target) {
                     targetIds.remove(at: i);
                     KIOSlastText.removeValue(forKey: String(targetField.hash));
-                    targetField.removeTarget(nil, action: nil, for: .editingChanged);
+                    if (targetField is UITextField) {
+                        let targetTextField = targetField as! UITextField
+                        targetTextField.removeTarget(nil, action: nil, for: .editingChanged);
+                    } else if (targetField is UITextView) {
+                        let targetTextView = targetField as! UITextView
+                        targetTextView.removeTarget(nil, action: nil, for: .editingChanged);
+                    }
                     break;
                 }
             }
@@ -416,7 +436,7 @@ open class RNTypingDNARecorderMobile: NSObject {
         return hash;
     }
     
-    fileprivate static func getDiagram(_ extended: Bool,_ str: String,_ textId: Int,_ tpLength: Int,_ target:UITextField?,_ caseSensitive: Bool) -> String {
+    fileprivate static func getDiagram(_ extended: Bool,_ str: String,_ textId: Int,_ tpLength: Int,_ target:UIView?,_ caseSensitive: Bool) -> String {
         log(message: "[TypingDNA] Getting the diagram { extended: %d, str: %@, textId: %d, tpLength: %d, target: %@, caseSensitive: %d }", level: 2, extended, str, textId, tpLength, String(target?.hashValue ?? -1), caseSensitive);
         var returnStr:String = "";
         var motionArr:[String] = [];
@@ -433,7 +453,13 @@ open class RNTypingDNARecorderMobile: NSObject {
                 stackDiagram = sliceStackByTargetId(stackDiagram, targetId);
             }
             if (str == "") {
-                str = target!.text!;
+                if (target is UITextField) {
+                    let targetTextField = target as! UITextField
+                    str = targetTextField.text!;
+                } else if (target is UITextView) {
+                    let targetTextView = target as! UITextView
+                    str = targetTextView.text!;
+                }
                 log(message: "[TypingDNA] New str value { str: %@ }", level: 2, str);
             }
         }

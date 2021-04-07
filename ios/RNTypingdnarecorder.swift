@@ -37,21 +37,21 @@ class RNTypingdnarecorder: NSObject {
     @objc
     func addTarget(_ targetId: String) {
         DispatchQueue.main.async {
-            RNTypingDNARecorderMobile.addTarget(RNTypingdnarecorder.findUiTextField(targetId))
+            RNTypingDNARecorderMobile.addTarget(RNTypingdnarecorder.findTarget(targetId))
         }
     }
     
     @objc
     func removeTarget(_ targetId: String) {
         DispatchQueue.main.async {
-            RNTypingDNARecorderMobile.removeTarget(RNTypingdnarecorder.findUiTextField(targetId))
+            RNTypingDNARecorderMobile.removeTarget(RNTypingdnarecorder.findTarget(targetId))
         }
     }
     
     @objc
     func getTypingPattern(_ type: Int, length: Int, text: String, textId: Int, target: String, caseSensitive: Bool, callback: @escaping RCTResponseSenderBlock) {
         DispatchQueue.main.async {
-            callback([RNTypingDNARecorderMobile.getTypingPattern(type, length, text, textId, RNTypingdnarecorder.findUiTextField(target), caseSensitive)])
+            callback([RNTypingDNARecorderMobile.getTypingPattern(type, length, text, textId, RNTypingdnarecorder.findTarget(target), caseSensitive)])
         }
     }
     
@@ -66,15 +66,20 @@ class RNTypingdnarecorder: NSObject {
             if (textField.placeholder == target) {
                 return textField
             }
+        } else if (node is UITextView) {
+            let textView = node as! UITextView
+            if (textView.getPlaceholder() == target) {
+                return textView
+            }
         }
         
         return node!.subviews.map{RNTypingdnarecorder.findField($0, target)}.filter{$0 != nil}.first ?? nil
     }
     
-    static private func findUiTextField(_ targetId: String) -> UITextField! {
+    static private func findTarget(_ targetId: String) -> UIView! {
         let rootViewController = UIApplication.shared.topMostViewController()
         let view = rootViewController!.self.view!
-        let targetField = RNTypingdnarecorder.findField(view, targetId) as! UITextField
+        let targetField = RNTypingdnarecorder.findField(view, targetId)!
         return targetField
     }
 }
@@ -101,5 +106,11 @@ extension UIViewController {
 extension UIApplication {
     func topMostViewController() -> UIViewController? {
         return self.keyWindow?.rootViewController?.topMostViewController()
+    }
+}
+
+extension UITextView {
+    func getPlaceholder() -> String? {
+        return value(forKey: "_placeholder") as? String
     }
 }

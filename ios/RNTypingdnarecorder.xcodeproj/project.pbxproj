@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32561D86261B410A00D79682 /* UITextView+UIControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 32561D85261B410A00D79682 /* UITextView+UIControl.m */; };
 		B13597D62281ADA300ABF11B /* RNTypingdnarecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13597D52281ADA300ABF11B /* RNTypingdnarecorder.swift */; };
 		B135981B2281C51E00ABF11B /* RNTypingDNARecorderMobile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B135981A2281C51E00ABF11B /* RNTypingDNARecorderMobile.swift */; };
 		B3E7B58A1CC2AC0600A0062D /* RNTypingdnarecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNTypingdnarecorder.m */; };
@@ -26,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNTypingdnarecorder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNTypingdnarecorder.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		32561D84261B408700D79682 /* UITextView+UIControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextView+UIControl.h"; sourceTree = "<group>"; };
+		32561D85261B410A00D79682 /* UITextView+UIControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+UIControl.m"; sourceTree = "<group>"; };
 		B13597D42281ADA200ABF11B /* RNTypingdnarecorder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNTypingdnarecorder-Bridging-Header.h"; sourceTree = "<group>"; };
 		B13597D52281ADA300ABF11B /* RNTypingdnarecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTypingdnarecorder.swift; sourceTree = "<group>"; };
 		B135981A2281C51E00ABF11B /* RNTypingDNARecorderMobile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTypingDNARecorderMobile.swift; sourceTree = "<group>"; };
@@ -54,6 +57,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				32561D85261B410A00D79682 /* UITextView+UIControl.m */,
+				32561D84261B408700D79682 /* UITextView+UIControl.h */,
 				B13597D52281ADA300ABF11B /* RNTypingdnarecorder.swift */,
 				B135981A2281C51E00ABF11B /* RNTypingDNARecorderMobile.swift */,
 				B3E7B5891CC2AC0600A0062D /* RNTypingdnarecorder.m */,
@@ -121,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B135981B2281C51E00ABF11B /* RNTypingDNARecorderMobile.swift in Sources */,
+				32561D86261B410A00D79682 /* UITextView+UIControl.m in Sources */,
 				B13597D62281ADA300ABF11B /* RNTypingdnarecorder.swift in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNTypingdnarecorder.m in Sources */,
 			);
