@@ -245,7 +245,7 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
-  - typingdnarecorder-react-native (1.0.5):
+  - typingdnarecorder-react-native (1.0.6):
     - React-Core
   - Yoga (1.14.0)
 
@@ -367,7 +367,7 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  typingdnarecorder-react-native: b57fefb2f3549b2460b0bd206c5d2be163859565
+  typingdnarecorder-react-native: 601695ea136d4656eb90039ed4451539ac5895b4
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
 PODFILE CHECKSUM: 9219aa892faa6ffdc1ec0df4c0e6b2173e16e756

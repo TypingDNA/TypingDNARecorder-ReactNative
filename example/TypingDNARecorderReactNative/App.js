@@ -56,6 +56,8 @@ export default class App extends React.Component<Props> {
         <Text style={styles.instructions}>{this.state.pattern}</Text>
 
         <TextInput
+          multiline={true}
+          numberOfLines={5}
           ref={(ref) => {
             if (!this.targetId && ref) {
               if (Platform.OS === 'ios') {

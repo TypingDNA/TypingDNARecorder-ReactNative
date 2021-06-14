@@ -3,9 +3,9 @@
 
 ## Getting started
 
-`$ npm install typingdnarecorder-react-native --save`
+`$ npm install --save typingdnarecorder-react-native`
 
-### Mostly automatic installation (not recommended)
+### Mostly automatic installation
 
 `$ react-native link typingdnarecorder-react-native`
 
@@ -15,8 +15,7 @@
 #### iOS
 
 1. In **ios/Podfile** add the following line in the **target** block `pod 'typingdnarecorder-react-native', :path => '../node_modules/typingdnarecorder-react-native'` and run `pod install`.
-2. In order for the Xcode project to build when you use Swift in the iOS static libary you include in the module, your main app project must contain Swift code and a bridging header itself. If your app does not contain Swift code, you can add an empty Swift source file with a bridging header to the project.
-3. Run your project (`Cmd+R`)
+2. Run your project (`Cmd+R`)
 
 #### Android
 
@@ -44,6 +43,14 @@
 			<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     	<uses-permission android:name="android.permission.TYPE_APPLICATION_OVERLAY"/>
 		```
+
+### Additional steps
+
+
+#### iOS
+
+* In order for the Xcode project to build when you use Swift in the iOS static library you include in the module, your main app project must contain Swift code and a bridging header itself. If your app does not contain Swift code, you can add an empty Swift source file with a bridging header to the project.
+* In order for the recorder library to work you may need to add `use_modular_headers!` at the start of the **ios/Podfile** of your project.
 
 ## Usage
 
@@ -139,7 +146,11 @@ export default class App extends React.Component<Props> {
                 // TextInput placeholder
                 this.targetId = 'Enter text';
               } else {
-                this.targetId = ref._nativeTag;
+                if (ref._inputRef && ref._inputRef._nativeTag !== undefined && ref._inputRef._nativeTag !== null) {
+                  this.targetId = ref._inputRef._nativeTag; // for older React Native versions
+                } else {
+                  this.targetId = ref._nativeTag;
+                }
               }
             }
           }}

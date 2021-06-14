@@ -1,6 +1,6 @@
 {
   "name": "typingdnarecorder-react-native",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "TypingDNA Recorder for React Native",
   "main": "index.js",
   "homepage": "https://typingdna.com",
@@ -12,9 +12,9 @@
     "typingdna",
     "typingdna-recorder"
   ],
-  "author": "",
-  "license": "",
+  "author": "TypingDNA",
+  "license": "Apache-2.0",
   "peerDependencies": {
-    "react-native": "0.63.4"
+    "react-native": "^0.59.5"
   }
 }

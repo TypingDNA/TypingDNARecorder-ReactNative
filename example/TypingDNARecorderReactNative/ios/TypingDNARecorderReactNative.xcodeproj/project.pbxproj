@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1FDA50065950883751496C83 /* libPods-TypingDNARecorderReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6C621A44EBEF5321065DC6 /* libPods-TypingDNARecorderReactNative.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -19,11 +20,10 @@
 		322CFAC525F7ED3C005076B6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322CFAC325F7ED3C005076B6 /* File.swift */; };
 		322CFAC625F7ED3C005076B6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322CFAC325F7ED3C005076B6 /* File.swift */; };
 		322CFAC725F7ED3C005076B6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322CFAC325F7ED3C005076B6 /* File.swift */; };
-		61E4D569F759204A7C4281E9 /* libPods-TypingDNARecorderReactNative-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C13CA74AF6B3CC0B16F264C0 /* libPods-TypingDNARecorderReactNative-tvOS.a */; };
+		72ACF5B8F5A6A9ED3993AE3F /* libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D71E19F7786C049475580F4 /* libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		8C4D6909A9BB03BDCE4446E2 /* libPods-TypingDNARecorderReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8706EBFB241B19672FB6FA1 /* libPods-TypingDNARecorderReactNative.a */; };
-		D44FAFBFB1BA4A36DF6FA1B2 /* libPods-TypingDNARecorderReactNative-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506548AD56EB8EB46BF8D466 /* libPods-TypingDNARecorderReactNative-tvOSTests.a */; };
-		F67BFC34D4EBCC09DB28EE89 /* libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F2E726AD6D53D00B4A7124 /* libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a */; };
+		8D32DFD862C5F735D7C81258 /* libPods-TypingDNARecorderReactNative-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5438238E5202598BC5F757BE /* libPods-TypingDNARecorderReactNative-tvOSTests.a */; };
+		D61D41B2CA7C7921C0FE307F /* libPods-TypingDNARecorderReactNative-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E25D0DDE5779E3ACCCD98D1 /* libPods-TypingDNARecorderReactNative-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,34 +48,34 @@
 		00E356EE1AD99517003FC87E /* TypingDNARecorderReactNativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TypingDNARecorderReactNativeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* TypingDNARecorderReactNativeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypingDNARecorderReactNativeTests.m; sourceTree = "<group>"; };
-		03AFB0C4621D1D7BD5EF64EB /* Pods-TypingDNARecorderReactNative-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-tvOSTests/Pods-TypingDNARecorderReactNative-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0A6C621A44EBEF5321065DC6 /* libPods-TypingDNARecorderReactNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TypingDNARecorderReactNative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* TypingDNARecorderReactNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypingDNARecorderReactNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TypingDNARecorderReactNative/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TypingDNARecorderReactNative/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TypingDNARecorderReactNative/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TypingDNARecorderReactNative/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TypingDNARecorderReactNative/main.m; sourceTree = "<group>"; };
+		238CDF184636CDF4EADBCF5A /* Pods-TypingDNARecorderReactNative-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-tvOS.release.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-tvOS/Pods-TypingDNARecorderReactNative-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* TypingDNARecorderReactNative-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TypingDNARecorderReactNative-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* TypingDNARecorderReactNative-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TypingDNARecorderReactNative-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		319CEBFEBBF22C4C3DB9368B /* Pods-TypingDNARecorderReactNative-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-tvOSTests/Pods-TypingDNARecorderReactNative-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		322CFABF25F7ED3C005076B6 /* TypingDNARecorderReactNative-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TypingDNARecorderReactNative-Bridging-Header.h"; sourceTree = "<group>"; };
 		322CFAC025F7ED3C005076B6 /* TypingDNARecorderReactNativeTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TypingDNARecorderReactNativeTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		322CFAC125F7ED3C005076B6 /* TypingDNARecorderReactNative-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TypingDNARecorderReactNative-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		322CFAC225F7ED3C005076B6 /* TypingDNARecorderReactNative-tvOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TypingDNARecorderReactNative-tvOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		322CFAC325F7ED3C005076B6 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		36E926961C02A05247EDCC6E /* Pods-TypingDNARecorderReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative.debug.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative/Pods-TypingDNARecorderReactNative.debug.xcconfig"; sourceTree = "<group>"; };
-		3DFA2D3DDC701D3F6A55C5F5 /* Pods-TypingDNARecorderReactNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative.release.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative/Pods-TypingDNARecorderReactNative.release.xcconfig"; sourceTree = "<group>"; };
-		3E1FDB77D205814B5F2B9A0D /* Pods-TypingDNARecorderReactNative-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-tvOSTests/Pods-TypingDNARecorderReactNative-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		506548AD56EB8EB46BF8D466 /* libPods-TypingDNARecorderReactNative-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TypingDNARecorderReactNative-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5FE4FBF06677C5320B456260 /* Pods-TypingDNARecorderReactNative-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-tvOS.release.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-tvOS/Pods-TypingDNARecorderReactNative-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		6DD0F6FA9BD725C10C9E9E93 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.release.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.release.xcconfig"; sourceTree = "<group>"; };
+		438DA2705F5BF38704D30DBD /* Pods-TypingDNARecorderReactNative-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-tvOS/Pods-TypingDNARecorderReactNative-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		4B6C7B64503D53F7FCAEAC75 /* Pods-TypingDNARecorderReactNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative.debug.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative/Pods-TypingDNARecorderReactNative.debug.xcconfig"; sourceTree = "<group>"; };
+		5438238E5202598BC5F757BE /* libPods-TypingDNARecorderReactNative-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TypingDNARecorderReactNative-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D71E19F7786C049475580F4 /* libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74B8087A2E3124E13EAC9DC9 /* Pods-TypingDNARecorderReactNative-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-tvOSTests/Pods-TypingDNARecorderReactNative-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = TypingDNARecorderReactNative/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9782A8B53F35BFF9EE69AF77 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.debug.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C13CA74AF6B3CC0B16F264C0 /* libPods-TypingDNARecorderReactNative-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TypingDNARecorderReactNative-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8706EBFB241B19672FB6FA1 /* libPods-TypingDNARecorderReactNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TypingDNARecorderReactNative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88D9FF917DC8702AAB3C4A6D /* Pods-TypingDNARecorderReactNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative.release.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative/Pods-TypingDNARecorderReactNative.release.xcconfig"; sourceTree = "<group>"; };
+		8E25D0DDE5779E3ACCCD98D1 /* libPods-TypingDNARecorderReactNative-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TypingDNARecorderReactNative-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		972EC80CD88225542FEFD288 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.release.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.release.xcconfig"; sourceTree = "<group>"; };
+		B7DA73A4DC7112F77C4C8972 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.debug.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F0FC2348368AC75BBDD14ED2 /* Pods-TypingDNARecorderReactNative-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypingDNARecorderReactNative-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-TypingDNARecorderReactNative-tvOS/Pods-TypingDNARecorderReactNative-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		F1F2E726AD6D53D00B4A7124 /* libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F67BFC34D4EBCC09DB28EE89 /* libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a in Frameworks */,
+				72ACF5B8F5A6A9ED3993AE3F /* libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C4D6909A9BB03BDCE4446E2 /* libPods-TypingDNARecorderReactNative.a in Frameworks */,
+				1FDA50065950883751496C83 /* libPods-TypingDNARecorderReactNative.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61E4D569F759204A7C4281E9 /* libPods-TypingDNARecorderReactNative-tvOS.a in Frameworks */,
+				D61D41B2CA7C7921C0FE307F /* libPods-TypingDNARecorderReactNative-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D44FAFBFB1BA4A36DF6FA1B2 /* libPods-TypingDNARecorderReactNative-tvOSTests.a in Frameworks */,
+				8D32DFD862C5F735D7C81258 /* libPods-TypingDNARecorderReactNative-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,10 +155,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				D8706EBFB241B19672FB6FA1 /* libPods-TypingDNARecorderReactNative.a */,
-				F1F2E726AD6D53D00B4A7124 /* libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a */,
-				C13CA74AF6B3CC0B16F264C0 /* libPods-TypingDNARecorderReactNative-tvOS.a */,
-				506548AD56EB8EB46BF8D466 /* libPods-TypingDNARecorderReactNative-tvOSTests.a */,
+				0A6C621A44EBEF5321065DC6 /* libPods-TypingDNARecorderReactNative.a */,
+				5D71E19F7786C049475580F4 /* libPods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.a */,
+				8E25D0DDE5779E3ACCCD98D1 /* libPods-TypingDNARecorderReactNative-tvOS.a */,
+				5438238E5202598BC5F757BE /* libPods-TypingDNARecorderReactNative-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,14 +199,14 @@
 		D3AC39F16B30DADA1B72D040 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				36E926961C02A05247EDCC6E /* Pods-TypingDNARecorderReactNative.debug.xcconfig */,
-				3DFA2D3DDC701D3F6A55C5F5 /* Pods-TypingDNARecorderReactNative.release.xcconfig */,
-				9782A8B53F35BFF9EE69AF77 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.debug.xcconfig */,
-				6DD0F6FA9BD725C10C9E9E93 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.release.xcconfig */,
-				F0FC2348368AC75BBDD14ED2 /* Pods-TypingDNARecorderReactNative-tvOS.debug.xcconfig */,
-				5FE4FBF06677C5320B456260 /* Pods-TypingDNARecorderReactNative-tvOS.release.xcconfig */,
-				03AFB0C4621D1D7BD5EF64EB /* Pods-TypingDNARecorderReactNative-tvOSTests.debug.xcconfig */,
-				3E1FDB77D205814B5F2B9A0D /* Pods-TypingDNARecorderReactNative-tvOSTests.release.xcconfig */,
+				4B6C7B64503D53F7FCAEAC75 /* Pods-TypingDNARecorderReactNative.debug.xcconfig */,
+				88D9FF917DC8702AAB3C4A6D /* Pods-TypingDNARecorderReactNative.release.xcconfig */,
+				B7DA73A4DC7112F77C4C8972 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.debug.xcconfig */,
+				972EC80CD88225542FEFD288 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.release.xcconfig */,
+				438DA2705F5BF38704D30DBD /* Pods-TypingDNARecorderReactNative-tvOS.debug.xcconfig */,
+				238CDF184636CDF4EADBCF5A /* Pods-TypingDNARecorderReactNative-tvOS.release.xcconfig */,
+				319CEBFEBBF22C4C3DB9368B /* Pods-TypingDNARecorderReactNative-tvOSTests.debug.xcconfig */,
+				74B8087A2E3124E13EAC9DC9 /* Pods-TypingDNARecorderReactNative-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -218,11 +218,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "TypingDNARecorderReactNativeTests" */;
 			buildPhases = (
-				5EDF2949266F841AD49A6694 /* [CP] Check Pods Manifest.lock */,
+				F932385F043A8A609DC8E805 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				30513A444E03BC5B7CA1A9BC /* [CP] Copy Pods Resources */,
+				D8A4A5EE1D0EEF5766FC5C33 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -238,13 +238,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "TypingDNARecorderReactNative" */;
 			buildPhases = (
-				80063A7AD533FE299D52CFF7 /* [CP] Check Pods Manifest.lock */,
+				E6DA82A27A76DC316FD04340 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				685B14616484849CB1589373 /* [CP] Copy Pods Resources */,
+				47A936E199EEB08B2B5D2042 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -259,7 +259,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "TypingDNARecorderReactNative-tvOS" */;
 			buildPhases = (
-				69AC121F2275BF827C05CD25 /* [CP] Check Pods Manifest.lock */,
+				EB81A11A61B39E8EA0163637 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -279,7 +279,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "TypingDNARecorderReactNative-tvOSTests" */;
 			buildPhases = (
-				92CCE06781DA4F85894F153F /* [CP] Check Pods Manifest.lock */,
+				5EFD00AE15A2F32E45FDBD07 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -308,6 +308,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = T4739W943K;
 						LastSwiftMigration = 1240;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -407,47 +408,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		30513A444E03BC5B7CA1A9BC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5EDF2949266F841AD49A6694 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		685B14616484849CB1589373 /* [CP] Copy Pods Resources */ = {
+		47A936E199EEB08B2B5D2042 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -465,7 +426,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TypingDNARecorderReactNative/Pods-TypingDNARecorderReactNative-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		69AC121F2275BF827C05CD25 /* [CP] Check Pods Manifest.lock */ = {
+		5EFD00AE15A2F32E45FDBD07 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -480,14 +441,32 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TypingDNARecorderReactNative-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-TypingDNARecorderReactNative-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		80063A7AD533FE299D52CFF7 /* [CP] Check Pods Manifest.lock */ = {
+		D8A4A5EE1D0EEF5766FC5C33 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6DA82A27A76DC316FD04340 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -509,7 +488,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		92CCE06781DA4F85894F153F /* [CP] Check Pods Manifest.lock */ = {
+		EB81A11A61B39E8EA0163637 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -524,7 +503,29 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TypingDNARecorderReactNative-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-TypingDNARecorderReactNative-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F932385F043A8A609DC8E805 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -628,7 +629,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9782A8B53F35BFF9EE69AF77 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.debug.xcconfig */;
+			baseConfigurationReference = B7DA73A4DC7112F77C4C8972 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -656,7 +657,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6DD0F6FA9BD725C10C9E9E93 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.release.xcconfig */;
+			baseConfigurationReference = 972EC80CD88225542FEFD288 /* Pods-TypingDNARecorderReactNative-TypingDNARecorderReactNativeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -680,11 +681,12 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 36E926961C02A05247EDCC6E /* Pods-TypingDNARecorderReactNative.debug.xcconfig */;
+			baseConfigurationReference = 4B6C7B64503D53F7FCAEAC75 /* Pods-TypingDNARecorderReactNative.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T4739W943K;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TypingDNARecorderReactNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -704,11 +706,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DFA2D3DDC701D3F6A55C5F5 /* Pods-TypingDNARecorderReactNative.release.xcconfig */;
+			baseConfigurationReference = 88D9FF917DC8702AAB3C4A6D /* Pods-TypingDNARecorderReactNative.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T4739W943K;
 				INFOPLIST_FILE = TypingDNARecorderReactNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -726,7 +729,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0FC2348368AC75BBDD14ED2 /* Pods-TypingDNARecorderReactNative-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 438DA2705F5BF38704D30DBD /* Pods-TypingDNARecorderReactNative-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -758,7 +761,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5FE4FBF06677C5320B456260 /* Pods-TypingDNARecorderReactNative-tvOS.release.xcconfig */;
+			baseConfigurationReference = 238CDF184636CDF4EADBCF5A /* Pods-TypingDNARecorderReactNative-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -789,7 +792,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03AFB0C4621D1D7BD5EF64EB /* Pods-TypingDNARecorderReactNative-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 319CEBFEBBF22C4C3DB9368B /* Pods-TypingDNARecorderReactNative-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -821,7 +824,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E1FDB77D205814B5F2B9A0D /* Pods-TypingDNARecorderReactNative-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 74B8087A2E3124E13EAC9DC9 /* Pods-TypingDNARecorderReactNative-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

@@ -771,8 +771,13 @@ public class RNTypingDNARecorderBase {
     }
 
     private static double rd(double value, int places) {
-        if (places < 0)
+        if (places < 0) {
             throw new IllegalArgumentException();
+        }
+
+        if (Double.isNaN(value) || Double.isInfinite(value)) {
+            return 0;
+        }
 
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);

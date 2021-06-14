@@ -110,7 +110,11 @@ open class RNTypingDNARecorderMobile: NSObject {
             message.withUTF8Buffer { (buf: UnsafeBufferPointer<UInt8>) in
                 buf.baseAddress!.withMemoryRebound(to: CChar.self, capacity: buf.count) { str in
                     withVaList(args) { valist in
-                        _swift_os_log(dso, ra, .default, .default, str, valist)
+                        if #available(iOS 10.0, *) {
+                            _swift_os_log(dso, ra, .default, .default, str, valist)
+                        } else {
+                            // Fallback on earlier versions
+                        }
                     }
                 }
             }
@@ -817,6 +821,7 @@ open class RNTypingDNARecorderMobile: NSObject {
                     var val:Double = varr[c];
                     if (Double(val).isNaN) {
                         val = 0.0;
+                        arr.append(String(val));
                     } else if (val == 0 && c > 0) {
                         val = 1.0;
                         arr.append(String(val));
@@ -1049,6 +1054,10 @@ open class RNTypingDNARecorderMobile: NSObject {
     
     @objc
     static public func startRecordMotion() {
+        if (motionStarted) {
+            return;
+        }
+
         log(message: "[TypingDNA] Starting motion recording...", level: 2);
         let interval = 1.0 / 60.0; // Hz
         accQueue.maxConcurrentOperationCount = 2;
